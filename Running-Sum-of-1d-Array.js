@@ -57,23 +57,43 @@ Constraints:
  * @param {number[]} nums
  * @return {number[]}
  */
- var runningSum = function(nums) {
+
+//  var runningSum = function(nums) {
+//     if(nums.length === 0) {
+//         return 'Number array is empty'
+//     }
+
+//     const resultArray = nums.map((element, index, array) => {
+//         let sum = 0;
+//         for(let i = 0; i <= index; i++) {
+//             sum += array[i];
+//             console.log(sum);
+//         }
+//         return sum;
+//     });
+
+//     console.log(nums);
+//     console.log(resultArray);
+//    // return resultArray;
+// };
+
+//Revised Solution (7/24/22)
+
+var runningSum = function(nums) {
     if(nums.length === 0) {
         return 'Number array is empty'
     }
 
-    const resultArray = nums.map((element, index, array) => {
-        let sum = 0;
-        for(let i = 0; i <= index; i++) {
-            sum += array[i];
-            console.log(sum);
-        }
-        return sum;
-    });
+    const resultArray = []
+    resultArray.push(nums[0]); //first element of the result array will always just be the first element of the nums array since no sum is needed yet
 
-    console.log(nums);
-    console.log(resultArray);
-   // return resultArray;
+    //Here we push the result of the addition between the current element in the nums array and the previous sum/element in the result array.
+    //Doing it this way reduces our space and complexity. 
+    for (let i=1; i < nums.length; i++) {
+        resultArray.push(nums[i] + resultArray[i-1])
+        console.log(resultArray);
+    }
+    
 };
 
 runningSum([1,2,3,4]);
