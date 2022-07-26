@@ -66,23 +66,60 @@ Let the for loop run to completion and then we return the resultArray;
  * @param {number} n
  * @return {string[]}
  */
- var fizzBuzz = function(n) {
+//  var fizzBuzz = function(n) {
+//     const resultArray = []
+    
+//     for (let i = 1; i <= n; i++) {
+
+//         if ((i % 3 === 0) && (i % 5 === 0)) {
+//             resultArray.push('FizzBuzz')
+//         }
+//         else if (i % 3 === 0) {
+//             resultArray.push('Fizz')
+//         }
+//         else if (i % 5 === 0) {
+//             resultArray.push('Buzz')
+//         }
+//         else {
+//             resultArray.push(String(i));
+//         }
+//     }
+
+//     console.log(resultArray);
+// };
+
+// fizzBuzz(3);
+
+// fizzBuzz(5);
+
+// fizzBuzz(15);
+
+
+//-----------------Another Solution-----------------//
+//This solution is more adapatable to handle addition of conditions to check
+
+var fizzBuzz = function(n) {
     const resultArray = []
     
     for (let i = 1; i <= n; i++) {
+        let divisibleBy3 = (i % 3 === 0);
+        let divisibleBy5 = (i % 5 === 0);
 
-        if ((i % 3 === 0) && (i % 5 === 0)) {
-            resultArray.push('FizzBuzz')
+        let currStr = "";
+
+        if (divisibleBy3) {
+            currStr += 'Fizz';
         }
-        else if (i % 3 === 0) {
-            resultArray.push('Fizz')
+
+        if (divisibleBy5) {
+            currStr += 'Buzz';
         }
-        else if (i % 5 === 0) {
-            resultArray.push('Buzz')
+
+        if (currStr.length === 0) {
+            currStr += String(i)
         }
-        else {
-            resultArray.push(String(i));
-        }
+
+        resultArray.push(currStr);
     }
 
     console.log(resultArray);
