@@ -62,40 +62,64 @@ Right sum = nums[1] + nums[2] = 1 + -1 = 0
  * @param {number[]} nums
  * @return {number}
  */
- var pivotIndex = function(nums) {
-    if(nums.length === 1) {return 0}
-    let result = -1;
+//  var pivotIndex = function(nums) {
+//     if(nums.length === 1) {return 0}
+//     let result = -1;
     
-    for (let i=0; i < nums.length; i++) {
-        if(checkForPivot(i, nums)) {
-            result = i;
-            break;
-        }
+//     for (let i=0; i < nums.length; i++) {
+//         if(checkForPivot(i, nums)) {
+//             result = i;
+//             break;
+//         }
+//     }
+    
+//     return result;
+// };
+
+
+
+// let checkForPivot = function(index, array) {
+//     let leftSum = 0, rightSum = 0;
+//     for(let j=0; j < index; j++) {
+//         leftSum += array[j]
+//     }
+    
+//     for(let k=(array.length - 1); k > index; k-- ) {
+//         rightSum += array[k]
+//     }
+    
+//     if (rightSum === leftSum) {
+//         return true
+//     }
+    
+//     else {
+//         return false
+//     }
+// }
+
+
+//-----------------------------Revised Solution-----------------------------------//
+//----------Psuedocode---------//
+/*
+Calculate the total sum
+Traverse array from left to right substracting current values from total to get right sum
+*/
+
+var pivotIndex = function(nums) {
+
+    //Calculate total
+    let total = 0
+    for(let i=0;i<nums.length;i++) {
+        total+=nums[i]
     }
-    
-    return result;
+
+    let leftSum = 0
+    for(let j=0;j<nums.length;j++){
+        if(leftSum===(total-nums[j]-leftSum)) return j
+        leftSum+=nums[j]
+    }
+    return -1
 };
-
-
-
-let checkForPivot = function(index, array) {
-    let leftSum = 0, rightSum = 0;
-    for(let j=0; j < index; j++) {
-        leftSum += array[j]
-    }
-    
-    for(let k=(array.length - 1); k > index; k-- ) {
-        rightSum += array[k]
-    }
-    
-    if (rightSum === leftSum) {
-        return true
-    }
-    
-    else {
-        return false
-    }
-}
 
 console.log(pivotIndex([1,7,3,6,5,6]));
 console.log(pivotIndex([1,2,3]));
