@@ -11,12 +11,17 @@ You can return the answer in any order.
 /*
 //----------PREP---------//
 //----------Parameters---------//
-What are they giving me? What are the expected arguments? Will it only ever be one type of data, or do I need to account for others? 
-Will there ever be an invalid input? Do I need to account for unexpected edge cases?
+-Given an array of integers called nums
+-Given a single integer called target
+
+2 <= nums.length <= 104
+-10^9 <= nums[i] <= 10^9
+-10^9 <= target <= 10^9
+Only one valid answer exists.
 
 //----------Return---------//
-What do they want me to return? Are they expecting a string? array? object? Is there a certain format the return is expected in? 
-Will the expected return ever change for invalid inputs or edge cases?
+-We should return two different indices of the array called nums such that the elements of those indices add up to the single integer called target
+-We can not use the same element twice
 
 //----------Examples---------//
 Example 1:
@@ -38,7 +43,39 @@ Input: nums = [3,3], target = 6
 Output: [0,1]
   
 //----------Psuedocode---------//
-In fairly plain speech, how would you solve this? What needs to happen to get from the starting inputs to the desired return? 
-Think it through step by step, if you write something down and it is more than a single action, you may need to break it down more. 
-Good pseudocode only comes with practice.
+Create loop for the passed in array called nums
+-On each iteration we subtract the target integer by the current element in the array indicated by the index. searchNum = Target - nums[i]
+-The result called searchNum is what we will search the rest of the array for
+-If a match is found then we record the index
+-If a match is not found then we go to the next iteration and repeat
+-We keep iterating until we find an answer
+-Note that everytime we iterate we start the search from the current index (i). This will reduce the size of the array to search which will reduce time complexity
 */
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+ */
+ var twoSum = function(nums, target) {
+    let searchNum = 0, index1 = 0, index2 = 0;
+    for(let i=0; i < nums.length; i++) {
+        let searchNum = target - nums[i];
+
+        for (let j=(i+1); j < nums.length; j++) {
+            if(searchNum === nums[j]) {
+                index1 = i
+                index2 = j;
+            }
+        }
+    }
+
+    return [index1, index2];
+};
+
+console.log(twoSum([2,7,11,15], 9));
+
+console.log(twoSum([3,2,4], 6));
+
+console.log(twoSum([3, 3], 6));
+
