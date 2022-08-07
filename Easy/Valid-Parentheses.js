@@ -23,6 +23,23 @@ Will the expected return ever change for invalid inputs or edge cases?
 //----------Examples---------//
 Check your understanding! Are tests provided that you can reference as examples? What would happen in invalid or edge situations? 
 Aim for at least 3 examples.
+
+Example 1:
+
+Input: s = "()"
+Output: true
+
+
+Example 2:
+
+Input: s = "()[]{}"
+Output: true
+
+
+Example 3:
+
+Input: s = "(]"
+Output: false
   
 //----------Psuedocode---------//
 In fairly plain speech, how would you solve this? What needs to happen to get from the starting inputs to the desired return? 
