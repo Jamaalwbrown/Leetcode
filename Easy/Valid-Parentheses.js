@@ -72,25 +72,28 @@ Output: false
         }
 
         if(s[i] === ')') {
-            if(tempStack.pop() === '[' || tempStack.pop() === '{') {
+            if(tempStack.pop() !== '(') {
+                console.log(false);
                 return false
             }
         }
 
         if(s[i] === ']') {
-            if(tempStack.pop() === '(' || tempStack.pop() === '{') {
-                console.log('Found error')
-                return false;
+            if(tempStack.pop() !== '[') {
+                console.log(false);
+                return false
             }
         }
 
         if(s[i] === '}') {
-            if(tempStack.pop() === '[' || tempStack.pop() === '(') {
+            if(tempStack.pop() !== '{') {
+                console.log(false);
                 return false
             }
         } 
     }
-    return true
+    console.log(tempStack.length != 0 ? false: true);
+    return tempStack.length != 0 ? false: true
 };
 
 isValid("()");
