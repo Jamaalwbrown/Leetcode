@@ -52,14 +52,180 @@ myQueue.peek(); // return 1
 myQueue.pop(); // return 1, queue is [2]
 myQueue.empty(); // return false
 
-
-Check your understanding! Are tests provided that you can reference as examples? What would happen in invalid or edge situations? 
-Aim for at least 3 examples.
   
 //----------Psuedocode---------//
-In fairly plain speech, how would you solve this? What needs to happen to get from the starting inputs to the desired return? 
-Think it through step by step, if you write something down and it is more than a single action, you may need to break it down more. 
-Good pseudocode only comes with practice.
-*/
+
+
+// var MyQueue = function() {
+//     this.stack1 = []
+//     this.stack1Size = 0
+//     this.stack2 = []
+//     this.stack2Size = 0
+//     this.front = null
+// };
+
+// /** 
+//  * @param {number} x
+//  * @return {void}
+//  */
+// MyQueue.prototype.push = function(x) {
+//     if(this.stack1Size === 0 && this.stack2Size === 0) {
+//         this.front = x;
+//     }
+//     if(this.stack1Size > 0) {
+//         this.stack1.push(x);
+//         this.stack1Size++
+//         console.log(this.stack1)
+//         return
+//     }
+    
+//     if (this.stack2Size > 0) {
+//         this.stack2.push(x)
+//         this.stack2Size++;
+//         console.log(this.stack2)
+//         return
+//     }
+    
+//     this.stack2.push(x)
+//     this.stack2Size++;
+//     console.log(this.stack2)
+//     return
+// };
+
+// /**
+//  * @return {number}
+//  */
+// MyQueue.prototype.pop = function() {
+//      if(this.stack1Size > 0) {
+//        while(this.stack1Size > 1) {
+//            this.stack2.push(this.stack1.pop());
+//            this.stack1Size--
+//            this.stack2Size++
+//        }
+//          console.log(this.stack1)
+//          this.stack1Size--
+//         return this.stack1.pop()
+//     }
+    
+//     if (this.stack2Size > 0) {
+//        while(this.stack2Size > 1) {
+//            this.stack1.push(this.stack2.pop());
+//            this.stack2Size--
+//            this.stack1Size++
+//        }
+//         let result = this.stack2.pop()
+//         this.stack2Size--
+//         this.front = this.stack1[this.stack1Size - 1];
+        
+//         if(this.stack1Size > 0) {
+//        while(this.stack1Size > 0) {
+//            this.stack2.push(this.stack1.pop());
+//            this.stack1Size--
+//            this.stack2Size++
+//        }
+//         }
+//         console.log(this.stack2)
+       
+//         return result
+        
+//     }
+// };
+
+// /**
+//  * @return {number}
+//  */
+// MyQueue.prototype.peek = function() {
+//    return this.front
+// };
+
+// /**
+//  * @return {boolean}
+//  */
+// MyQueue.prototype.empty = function() {
+//     if(this.stack1Size === 0 && this.stack2Size === 0) {
+//         return true
+//     }
+//     else {
+//         return false
+//     }
+// };
+
+/*----------------SOLUTION REFACTORED----------FASTER RUNTIME----------------*/
+
+var MyQueue = function() {
+    this.stack1 = []
+    this.stack1Size = 0
+    this.stack2 = []
+    this.stack2Size = 0
+    this.front = null
+};
+
+/** 
+ * @param {number} x
+ * @return {void}
+ */
+MyQueue.prototype.push = function(x) {
+    if(this.stack1Size === 0 && this.stack2Size === 0) {
+        this.front = x;
+    }
+    
+    if(this.stack1Size > 0) {
+         while(this.stack1Size > 0) {
+           this.stack2.push(this.stack1.pop())
+           this.stack2Size++
+           this.stack1Size--
+       }
+    }
+    
+    this.stack2.push(x)
+    this.stack2Size++;
+
+    while(this.stack2Size > 0) {
+           this.stack1.push(this.stack2.pop());
+           this.stack1Size++
+           this.stack2Size--
+       }
+    //console.log(this.stack1)
+};
+
+/**
+ * @return {number}
+ */
+MyQueue.prototype.pop = function() {
+    this.stack1Size--
+    return this.stack1.pop()
+
+};
+
+/**
+ * @return {number}
+ */
+MyQueue.prototype.peek = function() {
+    return this.front;
+};
+
+/**
+ * @return {boolean}
+ */
+MyQueue.prototype.empty = function() {
+    if(this.stack1Size === 0 && this.stack2Size === 0) {
+        return true
+    }
+    else {
+        return false
+    }
+};
+
+
+ 
+ var obj = new MyQueue()
+ obj.push(1)
+ console.log(obj)
+ obj.push(2);
+ console.log(obj)
+ console.log(obj.peek())
+ console.log(obj.pop())
+ console.log(obj.empty())
+ 
   
 //----------BEST PRACTICES SOLUTION----------//
