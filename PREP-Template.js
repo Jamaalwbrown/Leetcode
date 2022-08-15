@@ -19,8 +19,6 @@ In fairly plain speech, how would you solve this? What needs to happen to get fr
 Think it through step by step, if you write something down and it is more than a single action, you may need to break it down more. 
 Good pseudocode only comes with practice.
 */
-  
-//----------BEST PRACTICES SOLUTION----------//
 
 
 
