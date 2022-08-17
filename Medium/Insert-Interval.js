@@ -49,20 +49,23 @@ Check your understanding! Are tests provided that you can reference as examples?
 Aim for at least 3 examples.
   
 //----------Psuedocode---------//
+declare an empty array called combinedInterval that will hold any combined interval we have
+declare an empty array called result
 Loop through the intervals array
 Compare each element/interval array in intervals to the newInterval array
     check if startI of the element interval in intervals array is less than the startI in the newInterval array
-    if so then we know the interval in the intervals array starts before the interval in the newInterval array. 
+    if so then we know the interval in the intervals array starts before the interval in the newInterval array
         So we then check if the endI in the element/interval in the intervals array is greater than the startI in the newInterval array
         if so then we know that we have an overlap between the interval in the intervals array and the newInterval array
             We take startI in the interval in the intervals array and the endI in the newInterval array and create a new interval to account for the overlap
-        else then we don't have an overlap. 
+            store the new interval in the result array
+        else then we don't have an overlap
             We move onto the next element in the intervals array
     else then we know the interval in the newInterval array starts before the interval in the intervals array
         So we then check if the endI in the newInterval array is greater than startI in the intervals array
         if so then we know that we have an overlap between the the newInterval array and the interval in the intervals array 
             We take startI in the newInterval array and endI in the interval in the intervals array and create a new interval to account for the overlap
-        else then we don't have an overlap. 
+        else then we don't have an overlap.
             We move onto the next element in the intervals array
 
 
@@ -70,3 +73,82 @@ In fairly plain speech, how would you solve this? What needs to happen to get fr
 Think it through step by step, if you write something down and it is more than a single action, you may need to break it down more. 
 Good pseudocode only comes with practice.
 */
+
+/**
+ * @param {number[][]} intervals
+ * @param {number[]} newInterval
+ * @return {number[][]}
+ */
+ var insert = function(intervals, newInterval) {
+    let combinedInterval = []
+    let noOverlap = []
+    let overlap = []
+    if (intervals.length === 0) {
+        return [newInterval];
+    }
+    for (let i = 0; i < intervals.length; i++) {
+        if(intervals[i][0] < newInterval[0]) {
+            if(intervals[i][1] >= newInterval[0]) {
+                console.log(`We have an overlap on iteration ${i} with ${intervals[i][0]}`)
+                if(combinedInterval.length === 0) {
+                  combinedInterval.push(intervals[i][0], Math.max(intervals[i][1], newInterval[1]));  
+                }
+                else {
+                    combinedInterval = [combinedInterval[0], Math.max(intervals[i][1], newInterval[1])]
+                }
+                overlap.push(i);
+                console.log(`combinedInterval is ${combinedInterval}`);
+            }
+            else {
+                console.log(`No overlap on iteration: ${i}`)
+                noOverlap.push(i + 1);
+            }
+        }
+        
+        if(intervals[i][0] > newInterval[0]) {
+            if(newInterval[1] >= intervals[i][0]) {
+                console.log(`We have an overlap on iteration ${i}`)
+                if(combinedInterval.length === 0) {
+                  combinedInterval.push(newInterval[0], Math.max(intervals[i][1], newInterval[1]));  
+                }
+                else {
+                    combinedInterval = [combinedInterval[0], Math.max(intervals[i][1], newInterval[1])]
+                }
+                overlap.push(i);
+                console.log(`combinedInterval is ${combinedInterval}`);
+            }
+            else {
+                console.log(`No overlap on iteration: ${i}`)
+                noOverlap.push(i);
+            }
+        }
+        
+        if(intervals[i][0] === newInterval[0]) {
+            if(newInterval[1] > intervals[i][0]) {
+                console.log(`We have an overlap on iteration ${i}`)
+                if(combinedInterval.length === 0) {
+                  combinedInterval.push(newInterval[0], Math.max(intervals[i][1], newInterval[1]));  
+                }
+                else {
+                    combinedInterval = [combinedInterval[0], Math.max(intervals[i][1], newInterval[1])]
+                }
+                overlap.push(i);
+                console.log(`combinedInterval is ${combinedInterval}`);
+            }
+            else {
+                console.log(`No overlap on iteration: ${i}`)
+                noOverlap = i;
+            }
+        }     
+    }
+    
+    if(overlap.length !== 0) {
+        console.log(`We have a overlap that will be returned`)
+        intervals.splice(overlap[0], overlap.length, combinedInterval);
+        return intervals;
+    }
+    console.log(noOverlap);
+    
+    intervals.splice(noOverlap.length - 1, 0, newInterval)
+    return intervals;
+};
