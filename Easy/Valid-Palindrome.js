@@ -103,6 +103,42 @@ Good pseudocode only comes with practice.
     }
 };
 
+
+//Better Solution and Interview Friendly
+/*
+var isPalindrome = function (s) {
+    let phrase = formatString(s);
+
+    let i = 0;
+    let j = phrase.length - 1;
+
+    while (i < j) {
+        if (phrase[i] !== phrase[j]) {
+            return false;
+        }
+        i++;
+        j--;
+    }
+
+    return true;
+};
+
+function formatString(s) {
+    let res = "";
+    for (let char of s) {
+        if (char === " ") continue;
+
+        let lower = char.toLowerCase();
+        let upper = char.toUpperCase();
+		// add if it's a number or a letter
+        if (!isNaN(char) || lower !== upper) {
+            res += lower;
+        }
+    }
+    return res;
+}
+*/
+
 console.log(isPalindrome(''));
 console.log(isPalindrome(',:"^$#@'));
 console.log(isPalindrome('How old are you?'));
