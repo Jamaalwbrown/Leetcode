@@ -7,16 +7,8 @@
 -The numbers in the nums array nums[i] range from 0 <= nums[i] <= 100
 -The length of the nums array is 0 <= nums[i] <= 100
 
-
-What are they giving me? What are the expected arguments? Will it only ever be one type of data, or do I need to account for others? 
-Will there ever be an invalid input? Do I need to account for unexpected edge cases?
-
 //----------Return---------//
 -We return an array of counts. Each count in the array represents the count of numbers that are smaller than the number in the same position as the count in the passed in array
-- 
-
-What do they want me to return? Are they expecting a string? array? object? Is there a certain format the return is expected in? 
-Will the expected return ever change for invalid inputs or edge cases?
 
 //----------Examples---------//
 Example 1:
